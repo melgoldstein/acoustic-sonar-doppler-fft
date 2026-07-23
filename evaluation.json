@@ -1,0 +1,51 @@
+{
+  "train_seed": 31,
+  "holdout_seed": 87,
+  "classes": [
+    "light",
+    "medium",
+    "heavy"
+  ],
+  "models": {
+    "logistic": {
+      "balanced_accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          30,
+          0,
+          0
+        ],
+        [
+          0,
+          30,
+          0
+        ],
+        [
+          0,
+          0,
+          30
+        ]
+      ]
+    },
+    "svc": {
+      "balanced_accuracy": 1.0,
+      "confusion_matrix": [
+        [
+          30,
+          0,
+          0
+        ],
+        [
+          0,
+          30,
+          0
+        ],
+        [
+          0,
+          0,
+          30
+        ]
+      ]
+    }
+  }
+}
