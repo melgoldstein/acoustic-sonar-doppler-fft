@@ -3,7 +3,9 @@ from numpy.typing import NDArray
 from scipy.signal import hilbert
 
 
-def spectral_features(samples: NDArray[np.float64], sample_rate: float) -> NDArray[np.float64]:
+def spectral_features(
+    samples: NDArray[np.float64], sample_rate: float
+) -> NDArray[np.float64]:
     waveform = np.asarray(samples, dtype=float)
     if (
         waveform.ndim != 1

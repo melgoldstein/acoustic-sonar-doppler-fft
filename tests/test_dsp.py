@@ -6,7 +6,9 @@ from sonar_dsp.classifier import evaluate
 
 def test_carrier_and_modulation():
     timeline = np.arange(8192) / 2048
-    waveform = (1 + 0.4 * np.sin(2 * np.pi * 12 * timeline)) * np.sin(2 * np.pi * 300 * timeline)
+    waveform = (1 + 0.4 * np.sin(2 * np.pi * 12 * timeline)) * np.sin(
+        2 * np.pi * 300 * timeline
+    )
     centroid, rolloff, blade_rate = spectral_features(waveform, 2048)
     assert centroid == pytest.approx(300, abs=1)
     assert rolloff == pytest.approx(300, abs=15)

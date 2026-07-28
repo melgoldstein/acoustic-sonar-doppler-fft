@@ -32,11 +32,18 @@ def evaluate() -> dict[str, object]:
     training, training_labels = acoustic_trials(31)
     holdout, holdout_labels = acoustic_trials(87)
     results = {}
-    for name, estimator in (("logistic", LogisticRegression(max_iter=1000)), ("svc", SVC())):
-        model = make_pipeline(StandardScaler(), estimator).fit(training, training_labels)
+    for name, estimator in (
+        ("logistic", LogisticRegression(max_iter=1000)),
+        ("svc", SVC()),
+    ):
+        model = make_pipeline(StandardScaler(), estimator).fit(
+            training, training_labels
+        )
         predictions = model.predict(holdout)
         results[name] = {
-            "balanced_accuracy": float(balanced_accuracy_score(holdout_labels, predictions)),
+            "balanced_accuracy": float(
+                balanced_accuracy_score(holdout_labels, predictions)
+            ),
             "confusion_matrix": confusion_matrix(holdout_labels, predictions).tolist(),
         }
     return {
@@ -48,7 +55,9 @@ def evaluate() -> dict[str, object]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Evaluate spectral vessel-class features")
+    parser = argparse.ArgumentParser(
+        description="Evaluate spectral vessel-class features"
+    )
     parser.parse_args()
     print(json.dumps(evaluate(), indent=2))
 

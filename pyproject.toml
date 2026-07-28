@@ -18,3 +18,7 @@ packages = ["sonar_dsp"]
 package-dir = {"sonar_dsp" = "src"}
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
