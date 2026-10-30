@@ -1,5 +1,6 @@
 import argparse
 import json
+from pathlib import Path
 import numpy as np
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
@@ -58,8 +59,23 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Evaluate spectral vessel-class features"
     )
-    parser.parse_args()
-    print(json.dumps(evaluate(), indent=2))
+    parser.add_argument(
+        "--waveform", type=Path, help="Mono NumPy .npy waveform; emit spectral features"
+    )
+    parser.add_argument("--sample-rate", type=float, default=2048)
+    arguments = parser.parse_args()
+    try:
+        if arguments.waveform:
+            samples = np.load(arguments.waveform, allow_pickle=False)
+            features = spectral_features(samples, arguments.sample_rate)
+            output = dict(
+                zip(("centroid_hz", "rolloff_hz", "blade_rate_hz"), features.tolist())
+            )
+        else:
+            output = evaluate()
+    except (OSError, ValueError) as error:
+        parser.error(str(error))
+    print(json.dumps(output, indent=2))
 
 
 if __name__ == "__main__":

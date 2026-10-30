@@ -27,3 +27,23 @@ def test_invalid(waveform):
 def test_holdout():
     for result in evaluate()["models"].values():
         assert result["balanced_accuracy"] > 0.9
+
+
+def test_waveform_cli(tmp_path):
+    import subprocess
+    import sys
+    import json
+
+    timeline = np.arange(8192) / 2048
+    waveform = (1 + 0.4 * np.sin(2 * np.pi * 12 * timeline)) * np.sin(
+        2 * np.pi * 300 * timeline
+    )
+    path = tmp_path / "propeller.npy"
+    np.save(path, waveform)
+    result = subprocess.run(
+        [sys.executable, "-m", "sonar_dsp.classifier", "--waveform", str(path)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert json.loads(result.stdout)["blade_rate_hz"] == pytest.approx(12, abs=0.25)
