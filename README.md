@@ -1,6 +1,8 @@
 # Acoustic sonar Doppler features
 
-[![Verification](https://github.com/cankaan120/acoustic-sonar-doppler-fft/actions/workflows/ci.yml/badge.svg)](https://github.com/cankaan120/acoustic-sonar-doppler-fft/actions/workflows/ci.yml)
+[Portfolio: melgoldstein.com](https://melgoldstein.com/)
+
+[![Verification](https://github.com/melgoldstein/acoustic-sonar-doppler-fft/actions/workflows/ci.yml/badge.svg)](https://github.com/melgoldstein/acoustic-sonar-doppler-fft/actions/workflows/ci.yml)
 
 Extract spectral centroid, 85-percent energy roll-off and Hilbert-envelope blade
 modulation frequency. Compare scaled logistic regression and RBF SVC on independently
@@ -46,7 +48,7 @@ sonar-classify --waveform propeller.npy --sample-rate 2048
 ## Development
 
 ```sh
-git clone https://github.com/cankaan120/acoustic-sonar-doppler-fft.git
+git clone https://github.com/melgoldstein/acoustic-sonar-doppler-fft.git
 cd acoustic-sonar-doppler-fft
 python -m venv .venv
 # Activate .venv with your shell, then:
